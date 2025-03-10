@@ -306,48 +306,55 @@ In an iterative query, a DNS client provides a hostname, and the DNS Resolver re
 
 A non-recursive query is a query in which the DNS Resolver already knows the answer. It either immediately returns a DNS record because it already stores it in a local cache, or queries a DNS Name Server which is authoritative for the record, meaning it definitely holds the correct IP for that hostname. In both cases, there is no need for additional rounds of queries (like in recursive or iterative queries). Rather, a response is immediately returned to the client.
 
-## Record Types
 
-DNS records (aka zone files) are instructions that live in authoritative DNS servers and provide information about a domain including what IP address is associated with that domain and how to handle requests for that domain.
+## DNS Records
 
-These records consist of a series of text files written in what is known as _DNS syntax_. DNS syntax is just a string of characters used as commands that tell the DNS server what to do. All DNS records also have a _"TTL"_, which stands for time-to-live, and indicates how often a DNS server will refresh that record.
+DNS records are instructions for DNS servers that provide information about a domain, such as its IP address or how to handle requests for the domain.
 
-There are more record types but for now, let's look at some of the most commonly used ones:
-
-- **A (Address record)**: This is the record that holds the IP address of a domain.
-- **AAAA (IP Version 6 Address record)**: The record that contains the IPv6 address for a domain (as opposed to A records, which stores the IPv4 address).
-- **CNAME (Canonical Name record)**: Forwards one domain or subdomain to another domain, does NOT provide an IP address.
-- **MX (Mail exchanger record)**: Directs mail to an email server.
-- **TXT (Text Record)**: This record lets an admin store text notes in the record. These records are often used for email security.
-- **NS (Name Server records)**: Stores the name server for a DNS entry.
-- **SOA (Start of Authority)**: Stores admin information about a domain.
-- **SRV (Service Location record)**: Specifies a port for specific services.
-- **PTR (Reverse-lookup Pointer record)**: Provides a domain name in reverse lookups.
-- **CERT (Certificate record)**: Stores public key certificates.
+### Common DNS Records:
+- **A Record**: Points a domain to an **IPv4 address**.
+  - Example: `google.com` → `172.217.6.14`
+- **AAAA Record**: Points a domain to an **IPv6 address**.
+  - Example: `google.com` → `2001:0db8::1`
+- **CNAME Record**: Forwards a domain or subdomain to another domain.
+  - Example: `www.example.com` → `example.com`
+- **MX Record**: Directs email to an email server.
+  - Example: `mail.example.com` (for emails to `example.com`)
+- **TXT Record**: Stores **text information** for purposes like email security.
+  - Example: SPF records for email verification.
+- **NS Record**: Points to the **name servers** for a domain.
+  - Example: `ns1.example.com`
+- **SOA Record**: Contains **admin information** about the domain.
+- **SRV Record**: Specifies **port numbers** for specific services.
+- **PTR Record**: Used for **reverse lookups** (IP address to domain name).
+- **CERT Record**: Stores **public key certificates** for secure communication.
 
 ## Subdomains
 
-A subdomain is an additional part of our main domain name. It is commonly used to logically separate a website into sections. We can create multiple subdomains or child domains on the main domain.
-
-For example, `blog.example.com` where `blog` is the subdomain, `example` is the primary domain and `.com` is the top-level domain (TLD). Similar examples can be `support.example.com` or `careers.example.com`.
+A **subdomain** is a part of a larger domain, typically used to separate sections of a website or service.
+- Example: `blog.example.com` (where `blog` is the subdomain of `example.com`).
 
 ## DNS Zones
 
-A DNS zone is a distinct part of the domain namespace which is delegated to a legal entity like a person, organization, or company, who is responsible for maintaining the DNS zone. A DNS zone is also an administrative function, allowing for granular control of DNS components, such as authoritative name servers.
+A **DNS zone** is a section of the domain name space managed by an entity (e.g., person, company). It provides control over the DNS records for that section.
+
+- Example: `example.com` is a DNS zone, containing all its records.
 
 ## DNS Caching
 
-A DNS cache (sometimes called a DNS resolver cache) is a temporary database, maintained by a computer's operating system, that contains records of all the recent visits and attempted visits to websites and other internet domains. In other words, a DNS cache is just a memory of recent DNS lookups that our computer can quickly refer to when it's trying to figure out how to load a website.
+**DNS caching** involves storing recent DNS lookups (like IP addresses) on your device to speed up future visits to the same website.
 
-The Domain Name System implements a time-to-live (TTL) on every DNS record. TTL specifies the number of seconds the record can be cached by a DNS client or server. When the record is stored in a cache, whatever TTL value came with it gets stored as well. The server continues to update the TTL of the record stored in the cache, counting down every second. When it hits zero, the record is deleted or purged from the cache. At that point, if a query for that record is received, the DNS server has to start the resolution process.
+- DNS records have a **TTL (Time-to-Live)** value to determine how long a record stays in the cache.
+- Example: After visiting `google.com`, your device might cache its IP address `172.217.6.14` for a certain period.
 
 ## Reverse DNS
 
-A reverse DNS lookup is a DNS query for the domain name associated with a given IP address. This accomplishes the opposite of the more commonly used forward DNS lookup, in which the DNS system is queried to return an IP address. The process of reverse resolving an IP address uses PTR records. If the server does not have a PTR record, it cannot resolve a reverse lookup.
+**Reverse DNS lookup** is used to find the domain name associated with a given IP address, the opposite of looking up an IP from a domain name.
 
-Reverse lookups are commonly used by email servers. Email servers check and see if an email message came from a valid server before bringing it onto their network. Many email servers will reject messages from any server that does not support reverse lookups or from a server that is highly unlikely to be legitimate.
+- Uses **PTR records** for reverse lookup.
+- Example: Checking if IP `172.217.6.14` belongs to `google.com`.
 
-_Note: Reverse DNS lookups are not universally adopted as they are not critical to the normal function of the internet._
+
 
 ## Examples
 
