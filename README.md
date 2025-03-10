@@ -539,6 +539,23 @@ This becomes even more complicated if the nodes in the cluster are not homogeneo
 
 Additionally, storage becomes more difficult to manage, a shared storage device must prevent nodes from overwriting one another and distributed data stores have to be kept in sync.
 
+## Comparison Table
+
+| Feature            | Clustering | Load Balancing |
+|--------------------|------------|---------------|
+| **Definition**      | A group of servers working together as a single unit to provide redundancy and scalability. | A technique that distributes incoming traffic across multiple servers to prevent overload. |
+| **Purpose**        | Improves availability, fault tolerance, and parallel processing. | Ensures optimal resource utilization and prevents a single point of failure. |
+| **Architecture**   | Nodes (servers) work together, often sharing state or data. | A load balancer directs requests to different servers, which work independently. |
+| **Dependency**     | Servers in a cluster are tightly coupled and often share a common database. | Load-balanced servers are loosely coupled and may not share data. |
+| **Failover Handling** | If one server fails, another in the cluster takes over automatically. | If a server fails, the load balancer redirects traffic to healthy servers. |
+| **Example Use Cases** | Database clusters, high-performance computing, distributed caching. | Web server farms, API gateways, content delivery networks (CDNs). |
+| **Example Technologies** | Kubernetes, Apache Kafka, Redis Cluster. | Nginx, HAProxy, AWS Elastic Load Balancer (ELB). |
+
+## Key Differences
+- **Clustering** makes multiple servers work as a single entity, often sharing resources.
+- **Load Balancing** distributes traffic across multiple independent servers.
+- In many architectures, **clustering and load balancing** are combined for **high availability and scalability**.
+
 ## Examples
 
 Clustering is commonly used in the industry, and often many technologies offer some sort of clustering mode. For example:
