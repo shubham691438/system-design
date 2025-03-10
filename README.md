@@ -177,6 +177,8 @@ The seven abstraction layers of the OSI model can be defined as follows, from to
 
 ![osi-model](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/osi-model/osi-model.png)
 
+### VERY IMPORTANT : https://www.practicalnetworking.net/series/packet-traveling/packet-traveling/
+
 ### Application
 
 This is the only layer that directly interacts with data from the user. Software applications like web browsers and email clients rely on the application layer to initiate communication. But it should be made clear that client software applications are not part of the application layer, rather the application layer is responsible for the protocols and data manipulation that the software relies on to present meaningful data to the user. Application layer protocols include HTTP as well as SMTP.
